@@ -95,6 +95,19 @@
   @media (hover: hover) and (pointer: fine) { .bar nav a:hover { color: var(--text); background: rgba(243, 238, 226, .08); } }
   .bar .btn { min-height: 44px; padding: 0 1.15rem; font-size: .95rem; }
 
+  /* Language switch */
+  .lang-switch { display: flex; gap: .15rem; }
+  .lang {
+    display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+    background: none; border: 0; border-radius: 12px; cursor: pointer;
+    opacity: .6; transition: opacity .15s ease, transform .16s var(--ease-out);
+  }
+  .lang svg { border-radius: 4px; box-shadow: 0 0 0 1px rgba(243, 238, 226, .25); }
+  .lang[aria-pressed="true"] { opacity: 1; }
+  .lang[aria-pressed="true"] svg { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--mustard); }
+  .lang:active { transform: scale(.94); }
+  @media (hover: hover) and (pointer: fine) { .lang:hover { opacity: 1; } }
+
   /* Hero */
   .hero { position: relative; overflow: hidden; isolation: isolate; }
   .hero-photo {
@@ -229,7 +242,7 @@
   }
   @media (max-width: 480px) {
     .bar .btn-line { display: none; }
-    .brand span { font-size: .95rem; }
+    .brand span { display: none; }
     .hero-actions .btn { flex: 1 1 100%; }
     .pay-actions .btn { flex: 1 1 100%; }
   }
@@ -245,15 +258,19 @@
 
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="#top" aria-label="Capivara Burgers, início">
+    <a class="brand" href="#top" aria-label="Capivara Burgers, início" data-en-label="Capivara Burgers, home">
       <img src="images/capybara-mascot.jpg" alt="" width="40" height="40">
       <span>Capivara Burgers</span>
     </a>
-    <nav aria-label="Principal">
-      <a href="#cardapio">Cardápio</a>
-      <a href="#mais">Mais pratos</a>
-      <a href="#pagar">Pagar</a>
+    <nav aria-label="Principal" data-en-label="Main">
+      <a href="#cardapio" data-en="Menu">Cardápio</a>
+      <a href="#mais" data-en="More dishes">Mais pratos</a>
+      <a href="#pagar" data-en="Pay">Pagar</a>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" class="lang" data-lang="pt" aria-pressed="true" aria-label="Português" title="Português"><svg viewBox="0 0 28 20" width="28" height="20" aria-hidden="true" focusable="false"><rect width="28" height="20" fill="#009c3b"/><polygon points="14,2 25.5,10 14,18 2.5,10" fill="#ffdf00"/><circle cx="14" cy="10" r="4.3" fill="#002776"/><path d="M9.8 9.2Q14 7.6 18.2 11" stroke="#fff" stroke-width=".9" fill="none"/></svg></button>
+      <button type="button" class="lang" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 28 20" width="28" height="20" aria-hidden="true" focusable="false"><rect width="28" height="20" fill="#fff"/><rect y="0.00" width="28" height="2.86" fill="#b22234"/><rect y="5.71" width="28" height="2.86" fill="#b22234"/><rect y="11.43" width="28" height="2.86" fill="#b22234"/><rect y="17.14" width="28" height="2.86" fill="#b22234"/><rect width="12.5" height="11.43" fill="#3c3b6e"/><circle cx="2.6" cy="2.4" r=".75" fill="#fff"/><circle cx="6.2" cy="2.4" r=".75" fill="#fff"/><circle cx="9.8" cy="2.4" r=".75" fill="#fff"/><circle cx="4.4" cy="5.7" r=".75" fill="#fff"/><circle cx="8" cy="5.7" r=".75" fill="#fff"/><circle cx="2.6" cy="9" r=".75" fill="#fff"/><circle cx="6.2" cy="9" r=".75" fill="#fff"/><circle cx="9.8" cy="9" r=".75" fill="#fff"/></svg></button>
+    </div>
     <a class="btn btn-line" href="https://www.instagram.com/capivara_burgers/" target="_blank" rel="noopener">Instagram</a>
     <a class="btn btn-cash" href="https://cash.app/$capivaraburgersllc" target="_blank" rel="noopener">Cash App</a>
   </div>
@@ -263,17 +280,17 @@
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-photo">
-      <img src="images/hero-burger.jpg" alt="X-Bacon com alface, tomate, milho, presunto, bacon e queijo derretido no pão com gergelim" width="1440" height="1440" fetchpriority="high">
+      <img src="images/hero-burger.jpg" alt="X-Bacon com alface, tomate, milho, presunto, bacon e queijo derretido no pão com gergelim" data-en-alt="X-Bacon with lettuce, tomato, corn, ham, bacon and melted cheese on a sesame bun" width="1440" height="1440" fetchpriority="high">
     </div>
     <div class="wrap hero-inner">
       <h1 id="hero-title" class="display"><span>Capivara</span><span>Burgers</span></h1>
       <p class="hero-copy">
-        Hambúrgueres no estilo brasileiro, com queijo, bacon, ovo, calabresa e batata palha.
-        <small>Brazilian-style burgers, loaded.</small>
+        <span data-en="Brazilian-style burgers with cheese, bacon, egg, calabresa sausage and potato sticks.">Hambúrgueres no estilo brasileiro, com queijo, bacon, ovo, calabresa e batata palha.</span>
+        <small data-en="Hambúrgueres brasileiros, bem recheados.">Brazilian-style burgers, loaded.</small>
       </p>
       <div class="hero-actions">
-        <a class="btn btn-tomato" href="#cardapio">Ver cardápio</a>
-        <a class="btn btn-cash" href="https://cash.app/$capivaraburgersllc" target="_blank" rel="noopener">Pagar no Cash App</a>
+        <a class="btn btn-tomato" href="#cardapio" data-en="See the menu">Ver cardápio</a>
+        <a class="btn btn-cash" href="https://cash.app/$capivaraburgersllc" target="_blank" rel="noopener" data-en="Pay with Cash App">Pagar no Cash App</a>
       </div>
     </div>
   </section>
@@ -281,8 +298,8 @@
   <section class="menu" id="cardapio" aria-labelledby="menu-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="menu-title" class="display">Cardápio</h2>
-        <p>Preços em dólares. Prices in US dollars.</p>
+        <h2 id="menu-title" class="display" data-en="Menu">Cardápio</h2>
+        <p data-en="Prices in US dollars.">Preços em dólares.</p>
       </div>
 
       <div class="menu-grid">
@@ -290,48 +307,48 @@
           <ul class="board" id="board">
             <li class="item is-active" tabindex="0" data-photo="hero" data-caption="X-Bacon">
               <div class="row"><h3>X-Burguer</h3><span class="price">$7</span></div>
-              <p class="desc">Hambúrguer, queijo mussarela</p>
+              <p class="desc" data-en="Beef patty, mozzarella">Hambúrguer, queijo mussarela</p>
               <img class="thumb" src="images/hero-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="hero" data-caption="X-Bacon">
               <div class="row"><h3>X-Salada</h3><span class="price">$9</span></div>
-              <p class="desc">Hambúrguer, queijo mussarela, alface, tomate, milho, batata palha</p>
+              <p class="desc" data-en="Beef patty, mozzarella, lettuce, tomato, corn, potato sticks">Hambúrguer, queijo mussarela, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/hero-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="hero" data-caption="X-Bacon">
               <div class="row"><h3>X-Egg</h3><span class="price">$12</span></div>
-              <p class="desc">Hambúrguer, queijo mussarela, presunto, alface, tomate, milho, batata palha</p>
+              <p class="desc" data-en="Beef patty, mozzarella, ham, lettuce, tomato, corn, potato sticks">Hambúrguer, queijo mussarela, presunto, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/hero-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="hero" data-caption="X-Bacon">
               <div class="row"><h3>X-Bacon</h3><span class="price">$13</span></div>
-              <p class="desc">Hambúrguer, queijo mussarela, presunto, alface, tomate, milho, batata palha</p>
+              <p class="desc" data-en="Beef patty, mozzarella, ham, lettuce, tomato, corn, potato sticks">Hambúrguer, queijo mussarela, presunto, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/hero-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="cheddar" data-caption="Bacon Cheddar Burguer">
               <div class="row"><h3>Bacon Cheddar Burguer</h3><span class="price">$14</span></div>
-              <p class="desc">2 hambúrgueres, queijo cheddar, bacon, cebola caramelizada</p>
+              <p class="desc" data-en="2 beef patties, cheddar, bacon, caramelized onion">2 hambúrgueres, queijo cheddar, bacon, cebola caramelizada</p>
               <img class="thumb" src="images/bacon-cheddar.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="stacked" data-caption="X-Tudo Frango">
               <div class="row"><h3>X-Tudo</h3><span class="price">$16</span></div>
-              <p class="desc">Hambúrguer, queijo mussarela, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
+              <p class="desc" data-en="Beef patty, mozzarella, bacon, egg, calabresa sausage, ham, lettuce, tomato, corn, potato sticks">Hambúrguer, queijo mussarela, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/stacked-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="stacked" data-caption="X-Tudo Frango">
               <div class="row"><h3>X-Tudo Frango</h3><span class="price">$16</span></div>
-              <p class="desc">Filé de frango, queijo mussarela, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
+              <p class="desc" data-en="Chicken fillet, mozzarella, bacon, egg, calabresa sausage, ham, lettuce, tomato, corn, potato sticks">Filé de frango, queijo mussarela, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/stacked-burger.jpg" alt="" loading="lazy">
             </li>
             <li class="item" tabindex="0" data-photo="stacked" data-caption="X-Tudo Frango">
-              <div class="row"><h3>Capivara Raivosa<span class="badge">a mais completa</span></h3><span class="price">$18</span></div>
-              <p class="desc">Hambúrguer, filé de frango, queijo mussarela, queijo cheddar, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
+              <div class="row"><h3>Capivara Raivosa<span class="badge" data-en="the most loaded">a mais completa</span></h3><span class="price">$18</span></div>
+              <p class="desc" data-en="Beef patty, chicken fillet, mozzarella, cheddar, bacon, egg, calabresa sausage, ham, lettuce, tomato, corn, potato sticks">Hambúrguer, filé de frango, queijo mussarela, queijo cheddar, bacon, ovo, calabresa, presunto, alface, tomate, milho, batata palha</p>
               <img class="thumb" src="images/stacked-burger.jpg" alt="" loading="lazy">
             </li>
           </ul>
           <div class="menu-note">
-            <span><strong>Temos maionese verde.</strong></span>
-            <span>Também temos refrigerantes.</span>
+            <span><strong data-en="We have green mayo.">Temos maionese verde.</strong></span>
+            <span data-en="We also have sodas.">Também temos refrigerantes.</span>
           </div>
         </div>
 
@@ -341,7 +358,7 @@
             <img data-key="cheddar" src="images/bacon-cheddar.jpg" alt="">
             <img data-key="stacked" src="images/stacked-burger.jpg" alt="">
           </div>
-          <p class="stage-caption">Na foto: <b id="stage-name">X-Bacon</b></p>
+          <p class="stage-caption"><span data-en="Pictured:">Na foto:</span> <b id="stage-name">X-Bacon</b></p>
         </aside>
       </div>
     </div>
@@ -350,21 +367,21 @@
   <section class="more" id="mais" aria-labelledby="more-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="more-title" class="display">Mais pratos</h2>
-        <p>Esses pratos não estão na lista de preços. Pergunte os valores no Instagram.</p>
+        <h2 id="more-title" class="display" data-en="More dishes">Mais pratos</h2>
+        <p data-en="These dishes aren't on the price list. Ask for prices on Instagram.">Esses pratos não estão na lista de preços. Pergunte os valores no Instagram.</p>
       </div>
       <div class="cards">
         <figure class="card">
-          <img src="images/frango-bacon.jpg" alt="Sanduíche de frango com bacon, queijo e cebola caramelizada em pão longo" loading="lazy">
-          <figcaption><h3>Sanduíche de frango com bacon</h3><p>Queijo e cebola caramelizada no pão longo.</p></figcaption>
+          <img src="images/frango-bacon.jpg" alt="Sanduíche de frango com bacon, queijo e cebola caramelizada em pão longo" data-en-alt="Chicken and bacon sandwich with cheese and caramelized onion on a long roll" loading="lazy">
+          <figcaption><h3 data-en="Chicken and bacon sandwich">Sanduíche de frango com bacon</h3><p data-en="Cheese and caramelized onion on a long roll.">Queijo e cebola caramelizada no pão longo.</p></figcaption>
         </figure>
         <figure class="card">
-          <img src="images/frango-empanado.jpg" alt="Frango empanado dourado sobre batatas fritas onduladas" loading="lazy">
-          <figcaption><h3>Frango empanado com fritas</h3><p>Empanado crocante sobre batata frita.</p></figcaption>
+          <img src="images/frango-empanado.jpg" alt="Frango empanado dourado sobre batatas fritas onduladas" data-en-alt="Golden breaded chicken over crinkle-cut fries" loading="lazy">
+          <figcaption><h3 data-en="Breaded chicken with fries">Frango empanado com fritas</h3><p data-en="Crispy breaded chicken over fries.">Empanado crocante sobre batata frita.</p></figcaption>
         </figure>
         <figure class="card">
-          <img src="images/jantinha.jpg" alt="Espetinho de carne grelhada com arroz, mandioca frita, vinagrete e farofa" loading="lazy">
-          <figcaption><h3>Jantinha de espetinho</h3><p>Arroz, mandioca frita, vinagrete e farofa.</p></figcaption>
+          <img src="images/jantinha.jpg" alt="Espetinho de carne grelhada com arroz, mandioca frita, vinagrete e farofa" data-en-alt="Grilled beef skewer with rice, fried cassava, vinaigrette and farofa" loading="lazy">
+          <figcaption><h3 data-en="Espetinho plate">Jantinha de espetinho</h3><p data-en="Rice, fried cassava, vinaigrette and farofa.">Arroz, mandioca frita, vinagrete e farofa.</p></figcaption>
         </figure>
       </div>
     </div>
@@ -374,15 +391,15 @@
     <div class="wrap">
       <div class="pay-card">
         <div>
-          <h2 id="pay-title" class="display">Pague pelo Cash App</h2>
+          <h2 id="pay-title" class="display" data-en="Pay with Cash App">Pague pelo Cash App</h2>
           <p class="handle">$capivaraburgersllc</p>
-          <p class="lead">Escolha seu hambúrguer e envie o pagamento. Para pedidos e novidades, fale com a gente no Instagram.</p>
+          <p class="lead" data-en="Pick your burger and send the payment. For orders and news, message us on Instagram.">Escolha seu hambúrguer e envie o pagamento. Para pedidos e novidades, fale com a gente no Instagram.</p>
           <div class="pay-actions">
-            <a class="btn btn-dark" href="https://cash.app/$capivaraburgersllc" target="_blank" rel="noopener">Pagar no Cash App</a>
-            <a class="btn btn-outline" href="https://www.instagram.com/capivara_burgers/" target="_blank" rel="noopener">Ver o Instagram</a>
+            <a class="btn btn-dark" href="https://cash.app/$capivaraburgersllc" target="_blank" rel="noopener" data-en="Pay with Cash App">Pagar no Cash App</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/capivara_burgers/" target="_blank" rel="noopener" data-en="See Instagram">Ver o Instagram</a>
           </div>
         </div>
-        <img class="mascot" src="images/capybara-mascot.jpg" alt="Capivara com lenço verde e amarelo ao lado de um hambúrguer" width="240" height="240">
+        <img class="mascot" src="images/capybara-mascot.jpg" alt="Capivara com lenço verde e amarelo ao lado de um hambúrguer" data-en-alt="Capybara in a green and yellow scarf next to a burger" width="240" height="240">
       </div>
     </div>
   </section>
@@ -392,7 +409,7 @@
 <footer>
   <div class="wrap">
     <div class="who">
-      <img src="images/brand-bag.jpg" alt="Sacola de papel com a etiqueta da Capivara Burgers" width="64">
+      <img src="images/brand-bag.jpg" alt="Sacola de papel com a etiqueta da Capivara Burgers" data-en-alt="Paper bag with the Capivara Burgers label" width="64">
       <span>Capivara Burgers</span>
     </div>
     <a href="https://www.instagram.com/capivara_burgers/" target="_blank" rel="noopener">@capivara_burgers</a>
@@ -417,6 +434,38 @@
       item.addEventListener('mouseenter', function () { activate(item); });
       item.addEventListener('focus', function () { activate(item); });
       item.addEventListener('click', function () { activate(item); });
+    });
+  })();
+</script>
+<script>
+  (function () {
+    var KEY = 'capivara-lang';
+    var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+    var texts = $$('[data-en]'), alts = $$('[data-en-alt]'), labels = $$('[data-en-label]'), btns = $$('.lang');
+    texts.forEach(function (el) { el.setAttribute('data-pt', el.textContent); });
+    alts.forEach(function (el) { el.setAttribute('data-pt-alt', el.getAttribute('alt') || ''); });
+    labels.forEach(function (el) { el.setAttribute('data-pt-label', el.getAttribute('aria-label') || ''); });
+
+    function apply(lang) {
+      var en = lang === 'en';
+      document.documentElement.lang = en ? 'en' : 'pt-BR';
+      texts.forEach(function (el) { el.textContent = el.getAttribute(en ? 'data-en' : 'data-pt'); });
+      alts.forEach(function (el) { el.setAttribute('alt', el.getAttribute(en ? 'data-en-alt' : 'data-pt-alt')); });
+      labels.forEach(function (el) { el.setAttribute('aria-label', el.getAttribute(en ? 'data-en-label' : 'data-pt-label')); });
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    var start = saved === 'en' || saved === 'pt' ? saved : ((navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'pt');
+    apply(start);
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var lang = b.getAttribute('data-lang');
+        apply(lang);
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
+      });
     });
   })();
 </script>
